@@ -12,11 +12,11 @@ include('db.php');
 
 // Fetch user-specific data if needed (example: user's donation history or activities)
 $user_id = $_SESSION['user_id']; // Assuming the user's ID is stored in the session
-$sql_donations = "SELECT COUNT(*) AS total_donations FROM donations WHERE user_id = $user_id";
+$sql_donations = "SELECT COUNT(*) AS total_donations FROM donations WHERE id = $user_id";
 $result_donations = mysqli_query($conn, $sql_donations);
 $total_donations = mysqli_fetch_assoc($result_donations)['total_donations'];
 
-$sql_activities = "SELECT COUNT(*) AS total_activities FROM activities WHERE user_id = $user_id";
+$sql_activities = "SELECT COUNT(*) AS total_activities FROM activities WHERE id = $user_id";
 $result_activities = mysqli_query($conn, $sql_activities);
 $total_activities = mysqli_fetch_assoc($result_activities)['total_activities'];
 
@@ -61,7 +61,7 @@ mysqli_close($conn); // Close the database connection
 
     <!-- User Dashboard Content -->
     <div class="container mt-5">
-        <h2>Welcome, <?php echo $_SESSION['name']; ?> (<?php echo $_SESSION['role']; ?>)</h2>
+        <h2>Welcome, <?php echo isset($_SESSION['name']); ?> (<?php echo $_SESSION['role']; ?>)</h2>
         <p>Welcome to your dashboard! Here you can view your activities, donations, and manage your profile.</p>
 
         <!-- Cards with User-Specific Data -->
